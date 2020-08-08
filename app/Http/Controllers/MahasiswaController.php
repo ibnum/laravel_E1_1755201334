@@ -14,7 +14,7 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        return "Ini Halaman Mahasiswa (Index)";
+        return view('mahasiswa.index');
     }
 
     /**
