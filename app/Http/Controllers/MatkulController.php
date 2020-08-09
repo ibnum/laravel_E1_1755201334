@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Prodi;
+use App\Matkul;
 use Illuminate\Http\Request;
 
-class ProdiController extends Controller
+class MatkulController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class ProdiController extends Controller
      */
     public function index()
     {
-        $prodi = Prodi::all();
-
-        return view('prodi.index', compact('prodi'));
+        $matkul = Matkul::all();
+        return view('matkul.index', compact('matkul'));
     }
 
     /**
@@ -26,7 +25,7 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        return view('prodi.create');
+        return view('matkul.create');
     }
 
     /**
@@ -38,22 +37,23 @@ class ProdiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_prodi' => 'required|unique:prodi',
-            'nama_prodi' => 'required',
-            'kaprodi' => 'required',
+            'kode_matkul' => 'required|unique:matkul',
+            'nama_matkul' => 'required',
+            'sks' => 'required',
+            'semester' => 'required',
         ]);
 
-        Prodi::create($request->all());
-        return redirect()->route('prodi.index')->with('success', 'Data Berhasil Ditambahkan');
+        Matkul::create($request->all());
+        return redirect()->route('matkul.index')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Matkul  $matkul
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Matkul $matkul)
     {
         //
     }
@@ -61,46 +61,47 @@ class ProdiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Matkul  $matkul
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $prodi = Prodi::where('kode_prodi', $id)->first();
-        return view('prodi.edit', compact('prodi'));
+        $matkul = Matkul::where('kode_matkul', $id)->first();
+        return view('matkul.edit', compact('matkul'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Matkul  $matkul
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_prodi' => 'required',
-            'kaprodi' => 'required',
+            'nama_matkul' => 'required',
+            'sks' => 'required',
+            'semester' => 'required',
         ]);
-
-        Prodi::where('kode_prodi', $id)
+        Matkul::where('kode_matkul', $id)
             ->update([
-                'nama_prodi' => $request->nama_prodi,
-                'kaprodi' => $request->kaprodi,
+                'nama_matkul' => $request->nama_matkul,
+                'sks' => $request->sks,
+                'semester' => $request->semester,
             ]);
-        return redirect()->route('prodi.index')->with('success', 'Data Berhasil Diedit');
+        return redirect()->route('matkul.index')->with('success', 'Data Berhasil Diedit');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Matkul  $matkul
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Prodi::where('kode_prodi', $id)->delete();
-        return redirect()->route('prodi.index')->with('success', 'Data Berhasil Dihapus');
+        Matkul::where('kode_matkul', $id)->delete();
+        return redirect()->route('matkul.index')->with('success', 'Data Berhasil Dihapus');
     }
 }

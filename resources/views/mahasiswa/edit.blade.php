@@ -37,21 +37,18 @@
   <div class="col-sm-3">
   <select name="prodi" id="prodi" class="form-control">
     @foreach($prodi as $item)
-    <option value="{{ $item->kode_prodi }}" {{ ($mhs->prodi==$item->kode_prodi) ? 'selected' : '' }} >{{ $item->nama_prodi }}
-    </option>
+      <option value="{{ $item->kode_prodi }}" {{ ($mhs->prodi==$item->kode_prodi) ? 'selected' : '' }} >{{ $item->nama_prodi }}</option>
     @endforeach
     </select>
-    <small id="nama" class="form-text text-muted"></small>
     </div>
     </div>
-    <div class="form-group row">
+  <div class="form-group row">
     <label for="nim" class="col-sm-12">Alamat</label>
-    <div class="col-sm-8">
-    <textarea name="alamat" class="form-control" id="alamat">{{ $mhs->alamat }}</textarea>
-    <small id="nama" class="form-text text-muted"></small>
-    </div>
+      <div class="col-sm-8">
+        <textarea name="alamat" class="form-control" id="alamat">{{ $mhs->alamat }}</textarea>
+      </div>
     </div>
     <button class="btn btn-primary" type="submit">Simpan</button>
     <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
-    </form>
-    @endsection
+  </form>
+  @endsection
